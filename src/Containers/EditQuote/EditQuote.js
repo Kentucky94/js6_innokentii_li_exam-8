@@ -29,17 +29,25 @@ class EditQuote extends Component {
     });
   };
 
+  changeCategoryIDHandler = event => {
+    const type = event.target.name;
+
+    const categoryID = CATEGORIES.filter(category => category.title === event.target.value)[0].id;
+
+    this.setState({
+      [type]: categoryID
+    });
+  };
+
   sendDataHandler = async (event) => {
     event.preventDefault();
 
     const id = this.props.match.params.id;
 
-    const categoryID = CATEGORIES.filter(category => category.title === this.state.quoteCategory)[0].id;
-
     const newQuoteData = {
       quoteText: this.state.quoteText,
       quoteAuthor: this.state.quoteAuthor,
-      quoteCategory: categoryID
+      quoteCategory: this.state.quoteCategory,
     };
 
     await axiosAPI.patch('/quotes/'+ id +'.json', newQuoteData);
@@ -48,6 +56,7 @@ class EditQuote extends Component {
   };
 
   render() {
+
     return (
       <div className='EditQuote'>
         <h2>Edit Quote</h2>
@@ -57,8 +66,8 @@ class EditQuote extends Component {
           <select
             name="quoteCategory"
             id="quoteCategory"
-            onChange={this.changeDataHandler}
-            value={this.state.quoteCategory}
+            onChange={this.changeCategoryIDHandler}
+            value={CATEGORIES.filter(category => category.id === this.state.quoteCategory)[0].title}
             className='QuoteCategory'
           >
             {CATEGORIES.map(category => {

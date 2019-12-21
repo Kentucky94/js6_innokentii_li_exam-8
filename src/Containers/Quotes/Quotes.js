@@ -27,15 +27,17 @@ class Quotes extends Component {
     const response = await axiosAPI.get('/quotes.json');
 
     if(response.data){
-      this.setState({quotes: response.data})
+      this.setState({quotes: response.data, categoryTitle: 'All'})
     }
   };
 
   changeCategory = async (categoryID) => {
     const response = await axiosAPI.get('/quotes.json?orderBy="quoteCategory"&equalTo="' + categoryID + '"');
 
+    const categoryTitle = CATEGORIES.filter(category => category.id === categoryID)[0].title;
+
     if(response.data){
-      this.setState({quotes: response.data})
+      this.setState({quotes: response.data, categoryTitle})
     }
   };
 
@@ -82,7 +84,7 @@ class Quotes extends Component {
           </ul>
         </div>
         <div className='quotesList'>
-          <h4>Some category yet</h4>
+          <h2>{this.state.categoryTitle}</h2>
           {quotes}
         </div>
       </div>
