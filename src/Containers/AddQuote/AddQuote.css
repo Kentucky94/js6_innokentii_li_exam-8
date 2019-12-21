@@ -1,0 +1,45 @@
+.AddQuote{
+  align-items: flex-start;
+  border: 3px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 30px;
+}
+
+h4{
+  text-align: left;
+}
+
+form{
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+label{
+  display: block;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.QuoteAuthor{
+  padding: 10px;
+  width: 100%;
+}
+
+.QuoteText{
+  padding: 10px;
+  height: 200px;
+  resize: none;
+  width: 100%;
+}
+
+.FormButton{
+  display: block;
+  margin: 20px 0 0 0;
+  padding: 10px 20px;
+}

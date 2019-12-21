@@ -1,0 +1,16 @@
+.Header{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+.navLink{
+  color: black;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.active{
+  color: darkcyan;
+  text-decoration: underline;
+}

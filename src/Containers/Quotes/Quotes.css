@@ -1,0 +1,26 @@
+.Quotes{
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  text-align: left;
+}
+
+.categoriesList{
+  width: 25%
+}
+
+.categoriesListItem{
+  font-weight: bold;
+  font-style: italic;
+  padding: 20px 0;
+  width: 70%;
+}
+
+.categoriesList li:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.quotesList{
+  width: 65%;
+}
