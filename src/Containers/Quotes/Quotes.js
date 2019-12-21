@@ -8,6 +8,7 @@ import './Quotes.css';
 class Quotes extends Component {
   state = {
     quotes: {},
+    categoryTitle: 'All',
   };
 
   async componentDidMount() {
@@ -20,6 +21,22 @@ class Quotes extends Component {
 
   toEditPage = (id) => {
     this.props.history.push('/quotes/' + id + '/edit');
+  };
+
+  showAll = async (categoryID) => {
+    const response = await axiosAPI.get('/quotes.json');
+
+    if(response.data){
+      this.setState({quotes: response.data})
+    }
+  };
+
+  changeCategory = async (categoryID) => {
+    const response = await axiosAPI.get('/quotes.json?orderBy="quoteCategory"&equalTo="' + categoryID + '"');
+
+    if(response.data){
+      this.setState({quotes: response.data})
+    }
   };
 
   deleteQuote = async (id) => {
@@ -47,6 +64,7 @@ class Quotes extends Component {
       <li
         key={category.id}
         className='categoriesListItem'
+        onClick={() => this.changeCategory(category.id)}
       >
         {category.title}
       </li>
@@ -57,6 +75,9 @@ class Quotes extends Component {
         <div className='categoriesList'>
           <h3>Categories:</h3>
           <ul>
+            <li className='categoriesListItem' onClick={this.showAll}>
+              All
+            </li>
             {categories}
           </ul>
         </div>

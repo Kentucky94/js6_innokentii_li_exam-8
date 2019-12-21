@@ -5,7 +5,11 @@ import {CATEGORIES} from '../../constants';
 import './EditQuote.css';
 
 class EditQuote extends Component {
-  state={};
+  state = {
+    quoteText: '',
+    quoteAuthor: '',
+    quoteCategory: CATEGORIES[0].id,
+  };
 
   async componentDidMount() {
     const id = this.props.match.params.id;
@@ -30,10 +34,12 @@ class EditQuote extends Component {
 
     const id = this.props.match.params.id;
 
+    const categoryID = CATEGORIES.filter(category => category.title === this.state.quoteCategory)[0].id;
+
     const newQuoteData = {
       quoteText: this.state.quoteText,
       quoteAuthor: this.state.quoteAuthor,
-      quoteCategory: this.state.quoteCategory
+      quoteCategory: categoryID
     };
 
     await axiosAPI.patch('/quotes/'+ id +'.json', newQuoteData);

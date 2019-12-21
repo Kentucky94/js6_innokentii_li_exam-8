@@ -8,24 +8,26 @@ class AddQuote extends Component {
   state={
     quoteText: '',
     quoteAuthor: '',
-    quoteCategory: CATEGORIES[0].id,
+    quoteCategory: CATEGORIES[0].title,
   };
 
   changeDataHandler = event => {
     const type = event.target.name;
 
     this.setState({
-      [type]: event.target.value
+      [type]: event.target.value,
     });
   };
 
   sendDataHandler = async (event) => {
     event.preventDefault();
 
+    const categoryID = CATEGORIES.filter(category => category.title === this.state.quoteCategory)[0].id;
+
     const newQuoteData = {
       quoteText: this.state.quoteText,
       quoteAuthor: this.state.quoteAuthor,
-      quoteCategory: this.state.quoteCategory
+      quoteCategory: categoryID
     };
 
     await axiosAPI.post('/quotes.json', newQuoteData);
